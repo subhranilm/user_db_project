@@ -9,11 +9,13 @@ router.get('/:id?',function(req,res)
         User.getUserById(req.params.id,function(err,rows){
  
         if(err)
-            {
-                res.json(err).statusCode(404);
+            {   
+                res.statusCode(404);
+                res.json(err);
             }
-        else{
-                 res.json(rows).statusCode(200);
+        else{   
+                res.statusCode(200);
+                 res.json(rows);
             }
      });
     }
@@ -22,12 +24,13 @@ router.get('/:id?',function(req,res)
         User.getAllUsers(function(err,rows){
  
         if(err)
-            {
-                res.json(err).statusCode(404);
+            {   res.statusCode(404);
+                res.json(err);
             }
         else
-            {
-                res.json(rows).statusCode(200);
+            {   
+                res.statusCode(200);
+                res.json(rows);
             }
  
         });
@@ -45,7 +48,7 @@ router.get('/:id?',function(req,res)
             }
         else{   
                 res.statusCode(200);
-                res.json(req.body).statusCode(200);
+                res.json(req.body);
              }
      });
  });
@@ -56,12 +59,13 @@ router.get('/:id?',function(req,res)
     User.deleteUser(req.params.id,function(err,count){
 
     if(err)
-        {
+        {   
+            res.statusCode(404);
             res.json(err);
         }
     else
         {   
-            res.statusCode()
+            res.statusCode(200);
             res.json(count);
         }
     });
@@ -71,11 +75,13 @@ router.get('/:id?',function(req,res)
     console.log(req.body);
     User.updateUser(req.params.id,req.body,function(err,rows){
         if(err)
-            {
-                res.json(err)
+            {   
+                res.statusCode(500);
+                res.json(err);
             }
         else
-            {
+            {   
+                res.statusCode(200);
                 res.json(rows);
             }
 
